@@ -9,7 +9,7 @@ entity alu is
         Opcode : in  STD_LOGIC_VECTOR (3 downto 0); -- Operation selector
         Result : out STD_LOGIC_VECTOR (7 downto 0); -- ALU result
         Z      : out STD_LOGIC;                     -- Zero flag
-        C      : out STD_LOGIC;                     -- Carry flag
+        C      : out STD_LOGIC                      -- Carry flag
     );
 end alu;
 
