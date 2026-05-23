@@ -1,0 +1,3 @@
+# GHDL compilation and simulation files
+*.vcd
+*.cf
