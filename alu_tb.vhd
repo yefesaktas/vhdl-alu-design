@@ -30,4 +30,277 @@ architecture Behavioral of alu_tb is
 
 begin
 
+    -- Connect ALU pins to testbench lines
+    UUT: alu Port Map (
+        A      => A_tb,
+        B      => B_tb,
+        Opcode => Opcode_tb,
+        Result => Result_tb,
+        Z      => Z_tb,
+        C      => C_tb
+    );
+
+    -- Create stimulus process
+    stim_proc: process
+    begin
+
+    	-- --------------- ADD TESTS ---------------
+
+        -- Test 1: Result = 44, C = 0, Z = 0
+        Opcode_tb <= "0000";
+
+        A_tb <= std_logic_vector(to_unsigned(35, 8)); -- A = 35
+        B_tb <= std_logic_vector(to_unsigned(9, 8));  -- B = 9
+ 
+        wait for 10 ns;
+
+        -- Test 1.1: Result = 0, C = 1, Z = 1 
+        Opcode_tb <= "0000";
+
+        A_tb <= std_logic_vector(to_unsigned(200, 8)); -- A = 200
+        B_tb <= std_logic_vector(to_unsigned(56, 8));  -- B = 56
+
+        wait for 10 ns;
+
+        -- Test 1.2: Result = 0, C = 0, Z = 1 
+        Opcode_tb <= "0000";
+
+        A_tb <= std_logic_vector(to_unsigned(0, 8)); -- A = 0
+        B_tb <= std_logic_vector(to_unsigned(0, 8));  -- B = 0
+
+        wait for 10 ns;
+
+        -- Test 1.3: Result = 4, C = 1, Z = 0 
+        Opcode_tb <= "0000";
+
+        A_tb <= std_logic_vector(to_unsigned(250, 8)); -- A = 250
+        B_tb <= std_logic_vector(to_unsigned(10, 8));  -- B = 10
+
+        wait for 10 ns;
+
+        -- --------------- SUB TESTS --------------- 
+        
+        -- Test 2: Result = 7, C = 0, Z = 0 
+        Opcode_tb <= "0001";
+
+        A_tb <= std_logic_vector(to_unsigned(12, 8)); -- A = 12
+        B_tb <= std_logic_vector(to_unsigned(5, 8)); -- B = 5
+ 
+        wait for 10 ns;
+
+        -- Test 2.1: Result = 0, C = 0, Z = 1 
+        Opcode_tb <= "0001";
+
+        A_tb <= std_logic_vector(to_unsigned(24, 8)); -- A = 24
+        B_tb <= std_logic_vector(to_unsigned(24, 8)); -- B = 24
+ 
+        wait for 10 ns;
+
+        -- Test 2.2: Result = 1, C = 1, Z = 0 
+        Opcode_tb <= "0001";
+
+        A_tb <= std_logic_vector(to_unsigned(0, 8));   -- A = 0
+        B_tb <= std_logic_vector(to_unsigned(255, 8)); -- B = 255
+ 
+        wait for 10 ns;
+
+        -- Test 2.3: Result = 255, C = 1, Z = 0 
+        Opcode_tb <= "0001";
+
+        A_tb <= std_logic_vector(to_unsigned(254, 8)); -- A = 254
+        B_tb <= std_logic_vector(to_unsigned(255, 8)); -- B = 255
+ 
+        wait for 10 ns;
+
+        -- --------------- AND TESTS ---------------
+
+        -- Test 3: Result = 32, C = 0, Z = 0  
+        Opcode_tb <= "0010";
+
+        A_tb <= "00101010"; -- A = 42
+        B_tb <= "10110000"; -- B = 176
+
+        wait for 10 ns;
+
+        -- Test 3.1: Result = 0, C = 0, Z = 1  
+        Opcode_tb <= "0010";
+
+        A_tb <= "10101010"; -- A = 170
+        B_tb <= "01010101"; -- B = 85
+
+        wait for 10 ns;
+
+        -- Test 3.2: Result = 0, C = 0, Z = 1  
+        Opcode_tb <= "0010";
+
+        A_tb <= "00000000"; -- A = 0
+        B_tb <= "00000000"; -- B = 0
+
+        wait for 10 ns;
+
+        -- Masking (Identity) Test
+        -- Test 3.3:  Result = 62, C = 0, Z = 0  
+        Opcode_tb <= "0010";
+
+        A_tb <= "11111111"; -- A = 255
+        B_tb <= "00111110"; -- B = 62
+
+        wait for 10 ns;
+
+        -- --------------- OR TESTS ---------------
+
+        -- Test 4: Result = 255, C = 0, Z = 0 
+        Opcode_tb <= "0011"; 
+
+        A_tb <= "10101010"; -- A = 170
+        B_tb <= "01010101"; -- B = 85
+
+        wait for 10 ns;
+
+        -- Test 4.1: Result = 0, C = 0, Z = 1 
+        Opcode_tb <= "0011"; 
+
+        A_tb <= "00000000"; -- A = 0
+        B_tb <= "00000000"; -- B = 0
+
+        wait for 10 ns;
+
+        -- Test 4.2: Result = 214, C = 0, Z = 0 
+        Opcode_tb <= "0011"; 
+
+        A_tb <= "10010110"; -- A = 150
+        B_tb <= "11000100"; -- B = 196
+
+        wait for 10 ns;
+
+        -- Masking (Identity) Test
+        -- Test 4.3: Result = 40, C = 0, Z = 0 
+        Opcode_tb <= "0011";
+
+        A_tb <= "00000000"; -- A = 0
+        B_tb <= "00101000"; -- B = 40
+
+        wait for 10 ns;
+
+        -- Masking (Force to 1) Test
+        -- Test 4.4: Result = 255, C = 0, Z = 0 
+        Opcode_tb <= "0011";
+
+        A_tb <= "11111111"; -- A = 255
+        B_tb <= "00111100"; -- B = 60
+
+        wait for 10 ns;
+
+		-- --------------- XOR TESTS ---------------
+
+        -- Test 5: Result = 255, C = 0, Z = 0 
+        Opcode_tb <= "0100"; 
+
+        A_tb <= "11110000"; -- A = 240
+        B_tb <= "00001111"; -- B = 15
+
+        wait for 10 ns;
+
+        -- Zero Output Test
+        -- Test 5.1: Result = 0, C = 0, Z = 1 
+        Opcode_tb <= "0100"; 
+
+        A_tb <= "11001100"; -- A = 204
+        B_tb <= "11001100"; -- B = 204
+
+        wait for 10 ns;
+
+        -- Identity Test
+        -- Test 5.2: Result = 170, C = 0, Z = 0 
+        Opcode_tb <= "0100"; 
+
+        A_tb <= "10101010"; -- A = 170
+        B_tb <= "00000000"; -- B = 0
+
+        wait for 10 ns;
+
+        -- Inversion Test
+        -- Test 5.3: Result = 85, C = 0, Z = 0 
+        Opcode_tb <= "0100"; 
+
+        A_tb <= "10101010"; -- A = 170
+        B_tb <= "11111111"; -- B = 255
+
+        wait for 10 ns;
+
+        -- --------------- NOT TESTS ---------------
+
+        -- Test 6: Result = 85, C = 0, Z = 0 
+        Opcode_tb <= "0101"; 
+
+        A_tb <= "10101010"; -- A = 170
+
+        wait for 10 ns;
+
+        -- Test 6.1: Result = 0, C = 0, Z = 1 
+        Opcode_tb <= "0101"; 
+
+        A_tb <= "11111111"; -- A = 255
+
+        wait for 10 ns;
+
+        -- Test 6.2: Result = 255, C = 0, Z = 0 
+        Opcode_tb <= "0101"; 
+
+        A_tb <= "00000000"; -- A = 0
+
+        wait for 10 ns;
+
+        -- --------------- INC TESTS (A+1) ---------------
+
+        -- Test 7: Result = 6, C = 0, Z = 0 
+        Opcode_tb <= "0110"; 
+
+        A_tb <= std_logic_vector(to_unsigned(5, 8)); -- A = 5
+        
+		wait for 10 ns;
+
+		-- Overflow
+        -- Test 7.1: Result = 0, C = 1, Z = 1 
+        Opcode_tb <= "0110"; 
+
+        A_tb <= std_logic_vector(to_unsigned(255, 8)); -- A = 255
+        
+        wait for 10 ns;
+
+        -- Test 7.2: Result = 1, C = 0, Z = 0 
+        Opcode_tb <= "0110"; 
+
+        A_tb <= std_logic_vector(to_unsigned(0, 8)); -- A = 0
+
+        wait for 10 ns;
+
+        -- --------------- DEC TESTS (A-1) ---------------
+
+        -- Test 8: Result = 4, C = 0, Z = 0 
+        Opcode_tb <= "0111"; 
+
+        A_tb <= std_logic_vector(to_unsigned(5, 8)); -- A = 5
+
+        wait for 10 ns;
+
+        -- Test 8.1: Result = 0, C = 0, Z = 1 
+        Opcode_tb <= "0111"; 
+
+        A_tb <= std_logic_vector(to_unsigned(1, 8)); -- A = 1
+
+        wait for 10 ns;
+
+        -- Underflow
+        -- Test 8.2: Result = 255, C = 1, Z = 0 
+        Opcode_tb <= "0111"; 
+
+        A_tb <= std_logic_vector(to_unsigned(0, 8)); -- A = 0
+        
+        wait for 10 ns;
+
+        -- Halt the simulation
+        wait;
+    end process;
+
 end Behavioral;
