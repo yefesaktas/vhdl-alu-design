@@ -54,6 +54,7 @@ begin
  
         wait for 10 ns;
 
+	-- 10 ns
         -- Test 1.1: Result = 0, C = 1, Z = 1 
         Opcode_tb <= "0000";
 
@@ -62,6 +63,7 @@ begin
 
         wait for 10 ns;
 
+	-- 20 ns
         -- Test 1.2: Result = 0, C = 0, Z = 1 
         Opcode_tb <= "0000";
 
@@ -70,6 +72,7 @@ begin
 
         wait for 10 ns;
 
+	-- 30 ns
         -- Test 1.3: Result = 4, C = 1, Z = 0 
         Opcode_tb <= "0000";
 
@@ -80,6 +83,7 @@ begin
 
         -- --------------- SUB TESTS --------------- 
         
+        -- 40 ns
         -- Test 2: Result = 7, C = 0, Z = 0 
         Opcode_tb <= "0001";
 
@@ -88,6 +92,7 @@ begin
  
         wait for 10 ns;
 
+	-- 50 ns
         -- Test 2.1: Result = 0, C = 0, Z = 1 
         Opcode_tb <= "0001";
 
@@ -96,6 +101,7 @@ begin
  
         wait for 10 ns;
 
+	-- 60 ns
         -- Test 2.2: Result = 1, C = 1, Z = 0 
         Opcode_tb <= "0001";
 
@@ -104,6 +110,7 @@ begin
  
         wait for 10 ns;
 
+	-- 70 ns
         -- Test 2.3: Result = 255, C = 1, Z = 0 
         Opcode_tb <= "0001";
 
@@ -114,6 +121,7 @@ begin
 
         -- --------------- AND TESTS ---------------
 
+	-- 80 ns
         -- Test 3: Result = 32, C = 0, Z = 0  
         Opcode_tb <= "0010";
 
@@ -122,6 +130,7 @@ begin
 
         wait for 10 ns;
 
+	-- 90 ns
         -- Test 3.1: Result = 0, C = 0, Z = 1  
         Opcode_tb <= "0010";
 
@@ -130,6 +139,7 @@ begin
 
         wait for 10 ns;
 
+	-- 100 ns
         -- Test 3.2: Result = 0, C = 0, Z = 1  
         Opcode_tb <= "0010";
 
@@ -138,6 +148,7 @@ begin
 
         wait for 10 ns;
 
+	-- 110 ns
         -- Masking (Identity) Test
         -- Test 3.3:  Result = 62, C = 0, Z = 0  
         Opcode_tb <= "0010";
@@ -149,6 +160,7 @@ begin
 
         -- --------------- OR TESTS ---------------
 
+	-- 120 ns
         -- Test 4: Result = 255, C = 0, Z = 0 
         Opcode_tb <= "0011"; 
 
@@ -157,6 +169,7 @@ begin
 
         wait for 10 ns;
 
+	-- 130 ns
         -- Test 4.1: Result = 0, C = 0, Z = 1 
         Opcode_tb <= "0011"; 
 
@@ -165,6 +178,7 @@ begin
 
         wait for 10 ns;
 
+	-- 140 ns
         -- Test 4.2: Result = 214, C = 0, Z = 0 
         Opcode_tb <= "0011"; 
 
@@ -173,6 +187,7 @@ begin
 
         wait for 10 ns;
 
+	-- 150 ns
         -- Masking (Identity) Test
         -- Test 4.3: Result = 40, C = 0, Z = 0 
         Opcode_tb <= "0011";
@@ -182,6 +197,7 @@ begin
 
         wait for 10 ns;
 
+	-- 160 ns
         -- Masking (Force to 1) Test
         -- Test 4.4: Result = 255, C = 0, Z = 0 
         Opcode_tb <= "0011";
@@ -191,8 +207,9 @@ begin
 
         wait for 10 ns;
 
-		-- --------------- XOR TESTS ---------------
+	-- --------------- XOR TESTS ---------------
 
+	-- 170 ns
         -- Test 5: Result = 255, C = 0, Z = 0 
         Opcode_tb <= "0100"; 
 
@@ -201,6 +218,7 @@ begin
 
         wait for 10 ns;
 
+	-- 180 ns
         -- Zero Output Test
         -- Test 5.1: Result = 0, C = 0, Z = 1 
         Opcode_tb <= "0100"; 
@@ -210,6 +228,7 @@ begin
 
         wait for 10 ns;
 
+	-- 190 ns
         -- Identity Test
         -- Test 5.2: Result = 170, C = 0, Z = 0 
         Opcode_tb <= "0100"; 
@@ -219,6 +238,7 @@ begin
 
         wait for 10 ns;
 
+	-- 200 ns
         -- Inversion Test
         -- Test 5.3: Result = 85, C = 0, Z = 0 
         Opcode_tb <= "0100"; 
@@ -230,6 +250,7 @@ begin
 
         -- --------------- NOT TESTS ---------------
 
+	-- 210 ns
         -- Test 6: Result = 85, C = 0, Z = 0 
         Opcode_tb <= "0101"; 
 
@@ -237,6 +258,7 @@ begin
 
         wait for 10 ns;
 
+	-- 220 ns
         -- Test 6.1: Result = 0, C = 0, Z = 1 
         Opcode_tb <= "0101"; 
 
@@ -244,6 +266,7 @@ begin
 
         wait for 10 ns;
 
+	-- 230 ns
         -- Test 6.2: Result = 255, C = 0, Z = 0 
         Opcode_tb <= "0101"; 
 
@@ -253,14 +276,16 @@ begin
 
         -- --------------- INC TESTS (A+1) ---------------
 
+	-- 240 ns
         -- Test 7: Result = 6, C = 0, Z = 0 
         Opcode_tb <= "0110"; 
 
         A_tb <= std_logic_vector(to_unsigned(5, 8)); -- A = 5
         
-		wait for 10 ns;
+	wait for 10 ns;
 
-		-- Overflow
+	-- 250 ns
+	-- Overflow
         -- Test 7.1: Result = 0, C = 1, Z = 1 
         Opcode_tb <= "0110"; 
 
@@ -268,6 +293,7 @@ begin
         
         wait for 10 ns;
 
+	-- 260 ns
         -- Test 7.2: Result = 1, C = 0, Z = 0 
         Opcode_tb <= "0110"; 
 
@@ -277,6 +303,7 @@ begin
 
         -- --------------- DEC TESTS (A-1) ---------------
 
+	-- 270 ns
         -- Test 8: Result = 4, C = 0, Z = 0 
         Opcode_tb <= "0111"; 
 
@@ -284,13 +311,15 @@ begin
 
         wait for 10 ns;
 
+	-- 280 ns
         -- Test 8.1: Result = 0, C = 0, Z = 1 
         Opcode_tb <= "0111"; 
 
         A_tb <= std_logic_vector(to_unsigned(1, 8)); -- A = 1
 
         wait for 10 ns;
-
+	
+	-- 290 ns
         -- Underflow
         -- Test 8.2: Result = 255, C = 1, Z = 0 
         Opcode_tb <= "0111"; 
@@ -299,6 +328,7 @@ begin
         
         wait for 10 ns;
 
+	-- 300 ns
         -- Halt the simulation
         wait;
     end process;
