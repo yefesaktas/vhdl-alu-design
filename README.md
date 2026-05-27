@@ -10,6 +10,12 @@
   - `Zero Flag (Z)`: Indicates the result is zero
   - `Carry Flag (C)`: Indicates arithmetic carries, overflows, and underflows
 
+## Synthesized Gate-Level Schematic
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yefesaktas/vhdl-alu-design/refs/heads/main/docs/alu-schematic.png" width="50%" alt="8-Bit ALU Logic Diagram" />
+</p>
+
 ## Operation Set (Opcodes)
 
 | Opcode | Operation | Zero Flag (Z) | Carry Flag (C) |
